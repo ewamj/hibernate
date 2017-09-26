@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
+
+    <persistence-unit name="puForResourceLocal" transaction-type="RESOURCE_LOCAL">
+        <description>
+            This is persistence unit for RESOURCE_LOCAL workshops example.
+        </description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.infoshareacademy.entities.User</class>
+        <class>com.infoshareacademy.entities.Group</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://vps148549.vps.ovh.ca:3306/isa-hibernate-workshops?useSSL=false" />-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/isa-hibernate-workshops?useSSL=false" />
+            <property name="javax.persistence.jdbc.user" value="isa" />
+            <property name="javax.persistence.jdbc.password" value="isa" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.integration.envers.enabled" value="false"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="puForJTA" transaction-type="JTA">
+        <description>
+            This is persistence unit for JTA workshops example.
+        </description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/MySqlDS</jta-data-source>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="puForNonJTA" transaction-type="JTA">
+        <description>
+            This is persistence unit for JTA workshops example.
+        </description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <non-jta-data-source>java:/MySqlDS</non-jta-data-source>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
+</persistence>
