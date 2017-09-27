@@ -24,12 +24,12 @@ public class User {
     @Column(name = "login")
     private String login;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP) // date z java.util.date, nie z paczki sql, dlatego wymaga adnotacji
     @Column(name = "timestamp")
     private Date timestamp;
 
     @ManyToOne// default : (fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "group_id") //mapowanie klucza obcego
     private Group groupId;
 
     public Integer getId() {

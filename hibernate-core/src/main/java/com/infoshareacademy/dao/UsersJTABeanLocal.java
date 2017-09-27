@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface UsersJTABeanLocal {
     void addUser();
     void updateUser(int id);
+    void deleteUser(int id);
 }

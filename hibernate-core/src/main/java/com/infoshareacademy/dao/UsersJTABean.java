@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 
 
+
 @Stateless
 public class UsersJTABean implements UsersJTABeanLocal {
 
@@ -16,7 +17,7 @@ public class UsersJTABean implements UsersJTABeanLocal {
     private EntityManager em;
 
     @Inject
-    UsersRelationsBeanLocal users;
+    UsersRelationsBeanLocal users; // za każdym wstrzyknięciem wszystko do nowa jak stateless
 
     public void addUser() {
 
@@ -29,8 +30,8 @@ public class UsersJTABean implements UsersJTABeanLocal {
 //        u.setTimestamp(new Date(new Date().getTime() + 1000000000));
         u.setGroupId(users.findGroupByID(1));
 
-        em.persist(u);
-        em.flush();
+        em.persist(u); // tworzy kopie lokalna entity managera na hibernate, tlumaczy i utrwala w db, transakcja jest obslugiwana przez kontener ----------- samo utworzenie pol - wierszy, nie zapisuje, aby zapisac, trzeba przekazac do persista
+        em.flush(); // czysci zainicjalizowanego em przed kolejnym uzyciem
     }
 
     @Override
@@ -38,5 +39,11 @@ public class UsersJTABean implements UsersJTABeanLocal {
         User user = em.find(User.class, id);
         user.setName(user.getName() + " -updated");
         em.merge(user);
+    }
+
+    public void deleteUser(int id) {
+        User user = em.find(User.class,id); //find szuka tylko poo kluczach głównych
+        em.remove(user);
+
     }
 }

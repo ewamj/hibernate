@@ -25,7 +25,7 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="puForJTA" transaction-type="JTA">
+    <persistence-unit name="puForJTA" transaction-type="JTA"> //JTA znaczy, ze transakcje sa zarzadzane przez kontener 
         <description>
             This is persistence unit for JTA workshops example.
         </description>

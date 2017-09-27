@@ -14,7 +14,7 @@ import java.io.IOException;
 public class UserJTAServlet extends HttpServlet {
 
     @Inject
-    UsersJTABeanLocal users;
+    UsersJTABeanLocal users; // wstrzyknięcie interfejsu ejb, który będzie realizował
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
